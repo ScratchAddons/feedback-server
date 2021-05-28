@@ -9,7 +9,7 @@ const Hook = new hookcord.Hook();
 Hook.login("758706320994992149", process.env.SECRET);
 
 app.get("/", (request, response) => {
-  response.send("hi! lol");
+  response.redirect("https:/scratchaddons.com");
 });
 
 app.post("/send", async (request, response) => {
@@ -49,7 +49,6 @@ app.post("/send", async (request, response) => {
         timestamp: new Date().toISOString(),
         color: 16743206
       }],
-      //content: "hi"
     });
     Hook.fire().catch(err => console.log(err));
     response.header("Access-Control-Allow-Origin", request.header("Origin"));
