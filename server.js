@@ -3,13 +3,14 @@ const express = require("express");
 const app = express();
 app.use(bodyParser.text());
 app.listen(process.env.PORT);
+console.log(`💡 Listening on port ${process.env.PORT}`)
 const hookcord = require("hookcord");
 const Hook = new hookcord.Hook();
-//
+
 Hook.login("758706320994992149", process.env.SECRET);
 
 app.get("/", (request, response) => {
-  response.redirect("https://scratchaddons.com");
+  response.send(`Nothing to see here, move along. <br/>See <code>https://scratchaddons.com/feedback</code>`);
 });
 app.get("/wake_up", (request, response) => {
   if (
@@ -18,7 +19,7 @@ app.get("/wake_up", (request, response) => {
   ) {
       response.header("Access-Control-Allow-Origin", request.header("Origin"));
       response.send('Alive')
-  } else response.status(403).send("nope!");
+  } else response.status(403).send("403 \nnot allowed");
 });
 
 app.post("/send", async (request, response) => {
@@ -83,5 +84,5 @@ app.post("/send", async (request, response) => {
     Hook.fire().catch((err) => console.log(err));
     response.header("Access-Control-Allow-Origin", request.header("Origin"));
     response.send("sent!");
-  } else response.status(403).send("nope!");
+  } else response.status(403).send("403 \nnot allowed");
 });
