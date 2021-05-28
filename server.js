@@ -9,13 +9,14 @@ const Hook = new hookcord.Hook();
 Hook.login("758706320994992149", process.env.SECRET);
 
 app.get("/", (request, response) => {
-  response.redirect("https:/scratchaddons.com");
+  response.redirect("https://scratchaddons.com");
 });
 app.get("/wake_up", (request, response) => {
   if (
     request.header("Origin") === "https://scratchaddons.com" ||
     request.header("Origin").startsWith("http://localhost")
   ) {
+      response.header("Access-Control-Allow-Origin", request.header("Origin"));
       response.send('Alive')
   } else response.status(403).send("nope!");
 });
